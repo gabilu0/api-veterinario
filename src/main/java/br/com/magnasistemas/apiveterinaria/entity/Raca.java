@@ -40,6 +40,24 @@ public class Raca {
 	}
 	public String getTemperamento() {
 		return temperamento;
+	}
+
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+
+	public void setNomeRaca(String nomeRaca) {
+		this.nomeRaca = nomeRaca;
+	}
+
+	public void setPorteMedio(String porteMedio) {
+		this.porteMedio = porteMedio;
+	}
+
+	public void setTemperamento(String temperamento) {
+		this.temperamento = temperamento;
 	}	
+	
+	
 }
 

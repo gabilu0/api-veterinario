@@ -17,6 +17,7 @@ public class RacaService {
 	
 	public Raca cadastrar(RacaDTO racadto) {
 		Raca raca = new Raca(racadto.nomeRaca(),racadto.especie(),racadto.porteMedio(),racadto.temperamento());	
+		
 		repository.save(raca);
 		return raca;
 	}
@@ -30,6 +31,20 @@ public class RacaService {
 		return repository.findAll();
 	}
 	
+	public List<Raca> buscaPorEspecie(String especie) {
+		return repository.findByEspecie(especie);
+	}
 	
+	public Raca alterarRaca(Long id, RacaDTO dto) {
+		Raca raca = repository.findById(id).get();
+		raca.setNomeRaca(dto.nomeRaca());
+		raca.setPorteMedio(dto.porteMedio());
+		raca.setEspecie(dto.especie());
+		raca.setTemperamento(dto.temperamento());
+		
+		repository.save(raca);
+		
+		return raca;
+	}
 	
 }
