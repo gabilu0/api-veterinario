@@ -3,6 +3,8 @@ package br.com.magnasistemas.apiveterinaria.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.magnasistemas.apiveterinaria.dto.RacaDTO;
@@ -15,20 +17,21 @@ public class RacaService {
 	@Autowired
 	private RacaRepository repository;
 	
-	public Raca cadastrar(RacaDTO racadto) {
-		Raca raca = new Raca(racadto.nomeRaca(),racadto.especie(),racadto.porteMedio(),racadto.temperamento());	
+	public RacaDTO cadastrar(RacaDTO dto) {
+		Raca raca = new Raca(dto.nomeRaca(),dto.especie(),dto.porteMedio(),dto.temperamento());	
 		
 		repository.save(raca);
-		return raca;
+		return dto;
 	}
 	
-	public Raca buscarPorId(Long id) {
-		Raca raca = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID " + id + "não encontrado"));
-		return raca;
+	public RacaDTO buscarPorId(Long id) {
+		Raca raca = repository.getReferenceById(id);
+		RacaDTO dto = new RacaDTO(raca);
+		return dto;
 	}
 	
-	public List<Raca> buscarTodos() {
-		return repository.findAll();
+	public Page<RacaDTO> buscarTodos(Pageable paginacao) {
+		return repository.findAll(paginacao).map(RacaDTO::new);
 	}
 	
 	public List<Raca> buscaPorEspecie(String especie) {
@@ -41,10 +44,13 @@ public class RacaService {
 		raca.setPorteMedio(dto.porteMedio());
 		raca.setEspecie(dto.especie());
 		raca.setTemperamento(dto.temperamento());
-		
 		repository.save(raca);
 		
 		return raca;
+	}
+
+	public void excluir(Long id) {
+		repository.delete(repository.getReferenceById(id));
 	}
 	
 }

@@ -1,6 +1,9 @@
 package br.com.magnasistemas.apiveterinaria.entity;
 
+import br.com.magnasistemas.apiveterinaria.enums.Temperamento;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,13 +19,14 @@ public class Raca {
 	private String nomeRaca;
 	private String especie;
 	private String porteMedio;
-	private String temperamento;
+	
+	@Enumerated(EnumType.STRING)
+	private Temperamento temperamento;
 	
 	public Raca() {
 	}
 
-	public Raca(String nomeRaca, String especie, String porteMedio, String temperamento) {
-		
+	public Raca(String nomeRaca, String especie, String porteMedio, Temperamento temperamento) {
 		this.nomeRaca = nomeRaca;
 		this.especie = especie;
 		this.porteMedio = porteMedio;
@@ -32,14 +36,21 @@ public class Raca {
 	public String getNomeRaca() {
 		return nomeRaca;
 	}
+	
 	public String getEspecie() {
 		return especie;
 	}
+	
 	public String getPorteMedio() {
 		return porteMedio;
 	}
-	public String getTemperamento() {
+	
+	public Temperamento getTemperamento() {
 		return temperamento;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public void setEspecie(String especie) {
@@ -54,10 +65,8 @@ public class Raca {
 		this.porteMedio = porteMedio;
 	}
 
-	public void setTemperamento(String temperamento) {
+	public void setTemperamento(Temperamento temperamento) {
 		this.temperamento = temperamento;
 	}	
-	
-	
 }
 
