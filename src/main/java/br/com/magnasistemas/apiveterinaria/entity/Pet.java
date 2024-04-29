@@ -3,6 +3,8 @@ package br.com.magnasistemas.apiveterinaria.entity;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.magnasistemas.apiveterinaria.enums.Genero;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,7 +23,7 @@ import jakarta.validation.constraints.NotNull;
 public class Pet {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private Integer idade;
@@ -34,6 +36,7 @@ public class Pet {
 	@JoinColumn(name="raca_id")
 	private Raca raca;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "pets")
 	private List<Dono> donos;
 	

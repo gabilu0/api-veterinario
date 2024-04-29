@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magnasistemas.apiveterinaria.dto.DonoDTO;
+import br.com.magnasistemas.apiveterinaria.dto.update.DonoDTOCadastro;
 import br.com.magnasistemas.apiveterinaria.service.DonoService;
 
 
@@ -26,7 +27,7 @@ public class DonoController {
 	private DonoService service;
 	
 	@PostMapping
-	public ResponseEntity<DonoDTO> cadastrar(@RequestBody DonoDTO dono) {
+	public ResponseEntity<DonoDTO> cadastrar(@RequestBody DonoDTOCadastro dono) {
 		return ResponseEntity.ok(service.cadastrar(dono));
 	}
 	

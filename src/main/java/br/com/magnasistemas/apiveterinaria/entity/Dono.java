@@ -3,7 +3,8 @@ package br.com.magnasistemas.apiveterinaria.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,11 +27,12 @@ public class Dono {
 	private String rg;
 	private LocalDate dataNascimento;
 
-	@ManyToMany//(cascade = CascadeType.ALL)
-//	@JoinTable(
-//	        name = "tb_Donopet",
-//	        joinColumns = @JoinColumn(name = "dono_id"),
-//	        inverseJoinColumns = @JoinColumn(name = "pet_id"))
+	@JsonIgnore
+	@ManyToMany
+    @JoinTable(
+        name = "tb_dono_pet",
+        joinColumns = @JoinColumn(name = "dono_id"),
+        inverseJoinColumns = @JoinColumn(name = "pet_id"))
 	private List<Pet> pets;
 
 	public Dono(String nome, String telefone, String rg, LocalDate dataNascimento, List<Pet> pets) {

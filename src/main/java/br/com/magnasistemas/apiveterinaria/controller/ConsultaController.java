@@ -13,37 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.magnasistemas.apiveterinaria.dto.PetDTO;
-import br.com.magnasistemas.apiveterinaria.dto.update.PetDTOInsert;
-import br.com.magnasistemas.apiveterinaria.entity.Pet;
-import br.com.magnasistemas.apiveterinaria.service.PetService;
-import jakarta.validation.Valid;
+import br.com.magnasistemas.apiveterinaria.dto.ConsultaDTO;
+import br.com.magnasistemas.apiveterinaria.entity.Consulta;
+import br.com.magnasistemas.apiveterinaria.service.ConsultaService;
+
+
 
 @RestController
-@RequestMapping("pet")
-public class PetController {
+@RequestMapping("consulta")
+public class ConsultaController {
 
 	@Autowired
-	private PetService service;
-
-	@PostMapping
-	public ResponseEntity<PetDTO> cadastrar(@RequestBody @Valid PetDTOInsert dto) {
-		return ResponseEntity.ok(service.cadastrar(dto));
-	}
+	private ConsultaService service;
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<PetDTO> alterarPet(@PathVariable Long id,@RequestBody @Valid PetDTOInsert dto) {
-		return ResponseEntity.ok(service.alterarPet(id, dto));
+	@PostMapping
+	public ResponseEntity<Consulta> cadastrar(@RequestBody ConsultaDTO dono) {
+		return ResponseEntity.ok(service.cadastrar(dono));
 	}
 	
 	@GetMapping
-	public Page<PetDTO> buscarTodos(Pageable paginao) {
-		return service.buscarTodos(paginao);
-		
+	public Page<Consulta> pegarTodos(Pageable paginacao) {
+		return service.pegarTodos(paginacao);
 	}
 	
-	@DeleteMapping("/{id}")
+	@PutMapping("/id/{id}")
+	public ResponseEntity<Consulta> editarDono(@PathVariable Long id, @RequestBody ConsultaDTO dto) {
+		return ResponseEntity.ok().body(service.editarConsulta(id,dto));
+	}
+	
+	@DeleteMapping("/id/{id}")
 	public void excluir(@PathVariable Long id) {
-		service.excluir(id);
+		service.excluir(id);		
 	}
 }
