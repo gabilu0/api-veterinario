@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import br.com.magnasistemas.apiveterinaria.enums.Genero;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -15,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity(name="Pet")
 @Table(name="tb_pet")
@@ -23,25 +23,31 @@ public class Pet {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private String nome;
 	private Integer idade;
 	
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
 	private BigDecimal peso;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="raca_id")
 	private Raca raca;
 	
 	@ManyToMany(mappedBy = "pets")
 	private List<Dono> donos;
 	
-	public Pet(Integer idade, Genero genero, BigDecimal peso, Raca raca) {
-		super();
-		this.idade = idade;
+	public Pet(String nome, Integer idade, Genero genero, BigDecimal peso, Raca raca,List<Dono> donos) {
+		this.nome   = nome;
+		this.idade  = idade;
 		this.genero = genero;
-		this.peso = peso;
-		this.raca = raca;
+		this.peso   = peso;
+		this.raca   = raca;
+		this.donos  = donos;
+	}
+
+	public Pet() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -79,6 +85,25 @@ public class Pet {
 	public void setRaca(Raca raca) {
 		this.raca = raca;
 	}
+	
+	public List<Dono> getDonos() {
+		return donos;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setDonos(@NotNull List<Dono> donos2) {
+		this.donos = donos2;
+		
+	}
+	
+	
 	
 	
 }

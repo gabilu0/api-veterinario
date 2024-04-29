@@ -12,6 +12,10 @@ public record RacaDTO(@PrimaryKeyJoinColumn Long id,
 		@NotNull Temperamento temperamento) {	
 	
 	public RacaDTO(Raca raca) {
-		this(raca.getId(), raca.getNomeRaca(), raca.getEspecie(), raca.getPorteMedio(), raca.getTemperamento());
+		this(raca.getId(), 
+				raca.getNomeRaca(), 
+				raca.getEspecie(), 
+				raca.getPorteMedio(), 
+				raca.getTemperamento());
 	}
 }

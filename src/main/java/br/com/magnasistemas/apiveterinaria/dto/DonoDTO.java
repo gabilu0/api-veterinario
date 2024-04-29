@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DonoDTO(@PrimaryKeyJoinColumn Long id,
 					  @NotNull String nome,
-					  @NotNull(message="Espécie obrigatória") String telefone, 
+					  @NotNull String telefone, 
 					  @NotNull String rg,
 					  @NotNull LocalDate dataNascimento,
 					  @NotNull List<Pet> pets) {

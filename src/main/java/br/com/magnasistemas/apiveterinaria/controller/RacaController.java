@@ -50,7 +50,7 @@ public class RacaController {
 	}
 	
 	@PutMapping("/id/{id}")
-	public ResponseEntity<Raca> alterarRaca(@PathVariable Long id, @RequestBody RacaDTO novaRaca) {
+	public ResponseEntity<Raca> alterarRaca(@PathVariable Long id, @RequestBody @Valid RacaDTO novaRaca) {
 		return ResponseEntity.ok().body(service.alterarRaca(id, novaRaca));		
 	}
 	

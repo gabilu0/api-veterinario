@@ -34,9 +34,13 @@ public class DonoService {
 		dono.setRg(dto.rg());
 		dono.setDataNascimento(dto.dataNascimento());
 		dono.setPets(dto.pets());
-		repository.flush();
+		repository.save(dono);
 		
 		return dto;
 	
+	}
+	
+	public void excluir(Long id) {
+		repository.delete(repository.getReferenceById(id));
 	}
 }

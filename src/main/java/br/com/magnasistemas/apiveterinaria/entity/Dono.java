@@ -26,11 +26,11 @@ public class Dono {
 	private String rg;
 	private LocalDate dataNascimento;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-	        name = "tb_Donopet",
-	        joinColumns = @JoinColumn(name = "dono_id"),
-	        inverseJoinColumns = @JoinColumn(name = "pet_id"))
+	@ManyToMany//(cascade = CascadeType.ALL)
+//	@JoinTable(
+//	        name = "tb_Donopet",
+//	        joinColumns = @JoinColumn(name = "dono_id"),
+//	        inverseJoinColumns = @JoinColumn(name = "pet_id"))
 	private List<Pet> pets;
 
 	public Dono(String nome, String telefone, String rg, LocalDate dataNascimento, List<Pet> pets) {
